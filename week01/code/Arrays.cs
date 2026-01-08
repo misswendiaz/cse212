@@ -14,10 +14,10 @@ public static class Arrays
         // be implemented by another person.
 
         // ===== PLAN =====
-        // Define multiples which is an array of doubles.
-        // Loop through the length starting from 1.
-        // Multiply the number from 1 until the length to get the desired multiples of the number.
-        // Add each multiple in the array.
+        // Define `multiples` which is an array of doubles with capacity `length`.
+        // Loop through the indices from 0 to `length - 1` (that is i is from 0 up until i < length, incrementing 1 each time).
+            // Multiply the number from 1 until the `length` (that is (i + 1) * number)) to get the desired multiples of the `number`.
+        // Add each `multiple` in the `multiples` array.
         // Return the array.
 
         // ===== CODE =====
@@ -47,5 +47,21 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // ===== PLAN =====
+        // Slice the list `data` based on the int `amount` indicated.
+            // Create a new list `slice1` consisting of the elements from the `data.Count - amount ` up until the last element.
+            // Create another list `slice2` consisting of the elements from the first position `0` up until the `data.Count` position.
+        // Replace `data` with the merged slices.
+            // Clear `data`.
+            // Add `slice1` and `slice2` to `data`.
+
+        // ===== CODE =====
+        List<int> slice1 = data.GetRange(data.Count - amount, amount);
+        List<int> slice2 = data.GetRange(0, data.Count - amount);
+
+        data.Clear();
+        data.AddRange(slice1);
+        data.AddRange(slice2);
     }
 }
