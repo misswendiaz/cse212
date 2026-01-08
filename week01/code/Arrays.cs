@@ -13,7 +13,25 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // ===== PLAN =====
+        // Define multiples which is an array of doubles.
+        // Loop through the length starting from 1.
+        // Multiply the number from 1 until the length to get the desired multiples of the number.
+        // Add each multiple in the array.
+        // Return the array.
+
+        // ===== CODE =====
+        var multiples = new double[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            double multiple = (i+1) * number;
+            multiples[i] = multiple;
+        }
+
+
+
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
