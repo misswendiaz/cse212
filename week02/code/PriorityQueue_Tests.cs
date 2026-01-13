@@ -25,5 +25,26 @@ public class PriorityQueueTests
         Assert.Fail("Implement the test case and then remove this.");
     }
 
+
+    [TestMethod]
+    // Scenario: 
+    // Expected Result: 
+    // Defect(s) Found: 
+    public void TestPriorityQueue_3()
+    {
+        var priorityQueue = new PriorityQueue();
+        Assert.Fail("Implement the test case and then remove this.");
+    }
+
+    [TestMethod]
+    // Scenario: 
+    // Expected Result: 
+    // Defect(s) Found: 
+    public void TestPriorityQueue_4()
+    {
+        var priorityQueue = new PriorityQueue();
+        Assert.Fail("Implement the test case and then remove this.");
+    }
+    
     // Add more test cases as needed below.
 }
