@@ -72,12 +72,19 @@ public static class SetsAndMaps
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
 
+            // Get the degree from the degree column
             var degree = fields[3];
+
+            // Initial degree count
             int count = 1;
+
+            // Check if the degree is in the dictionary
+            // If it is, increase the count by 1
             if (degrees.ContainsKey(degree))
             {
-                degrees[degree] += count;
+                degrees[degree] += 1;
             }
+            // If not, add the degree in the dictionary with the initial count of 1
             else
             {
                 degrees[degree] = count;
@@ -105,7 +112,110 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        // Convert the words into a dictionary where the key is the letter and the value is the count
+        var firstWord = new Dictionary<char, int>();
+        var secondWord = new Dictionary<char, int>();
+
+        
+        foreach (char c in word1)
+        {
+            // Check if the character is a letter
+            if (char.IsLetter(c))
+            {
+                // Check if it is in the dictionary [Note: It is not case sensitive]
+                // If it is, update the count
+                char key1 = c;
+                char key1Lower = char.ToLower(key1);
+                if (firstWord.ContainsKey(key1Lower))
+                {
+                    firstWord[key1Lower]++;
+                }
+
+                // If it is not, add it with a value/count of 1
+                else
+                {
+                    firstWord[key1Lower] = 1;
+                }
+            }            
+        }
+
+        foreach (char k in word2)
+        {
+            // Check if the character is a letter
+            if (char.IsLetter(k))
+            {
+                // Check if it is in the dictionary [Note: It is not case sensitive]
+                // If it is, update the count
+                char key2 = k;
+                char key2Lower = char.ToLower(key2);
+                if (secondWord.ContainsKey(key2Lower))
+                {
+                    secondWord[key2Lower]++;
+                }
+
+                // If it is not, add it with a value/count of 1
+                else
+                {
+                    secondWord[key2Lower] = 1;
+                }
+            }
+        }
+
+        // Check if the two dictionaries are equal
+
+        bool areEqual = false;
+
+        // Check if their counts are equal
+        // If their counts are not equal, then they are not equal
+        // Not anagrams
+        // Result: False
+        if (firstWord.Count != secondWord.Count)
+        {
+            areEqual = false;
+        }
+
+        // If their counts are equal
+        // Check if their contents are exactly the same
+        else
+        {
+            foreach (var entry in firstWord)
+            {
+                char key = entry.Key;
+                int value = entry.Value;
+
+                // Check if secondWord has the same key
+                // If they don't have the same key, then the two dictionaries are not equal
+                // Not anagrams
+                // End the loop
+                if (!secondWord.ContainsKey(key))
+                {
+                    areEqual = false;
+                    break;
+                }
+
+                // If they have the same key, check if the value for those keys are also the same
+                else
+                {
+                    // If their corresponding values are not equal, then the two dictionaries are not equal
+                    // Not anagrams
+                    // End the loop
+                    if (value != secondWord[key])
+                    {
+                        areEqual = false;
+                        break;
+                    }
+
+                    // If their values are equal, then the two dictionaries are equal, hence, an anagram
+                    else
+                    {
+                        areEqual = true;
+                    }
+                }
+            }
+        }
+
+        return areEqual;
     }
 
     /// <summary>
