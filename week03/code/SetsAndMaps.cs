@@ -71,8 +71,18 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
-        }
 
+            var degree = fields[3];
+            int count = 1;
+            if (degrees.ContainsKey(degree))
+            {
+                degrees[degree] += count;
+            }
+            else
+            {
+                degrees[degree] = count;
+            }
+        }
         return degrees;
     }
 
