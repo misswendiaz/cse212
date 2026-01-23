@@ -33,6 +33,22 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+
+        // Check allowed movements
+        bool[] movement = _mazeMap[(_currX, _currY)];
+
+        // Check if LEFT movement is allowed
+        // If allowed, move left
+        if (movement[0])
+        {
+            _currX -= 1;
+        }
+
+        // If not allowed, throw an error
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -42,6 +58,22 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+
+        // Check allowed movements
+        bool[] movement = _mazeMap[(_currX, _currY)];
+
+        // Check if RIGHT movement is allowed
+        // If allowed, move right
+        if (movement[1])
+        {
+            _currX += 1;
+        }
+
+        // If not allowed, throw an error
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -51,6 +83,22 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+
+        // Check allowed movements
+        bool[] movement = _mazeMap[(_currX, _currY)];
+
+        // Check if UPWARD movement is allowed
+        // If allowed, move up
+        if (movement[2])
+        {
+            _currY -= 1;
+        }
+
+        // If not allowed, throw an error
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -60,6 +108,22 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+
+        // Check allowed movements
+        bool[] movement = _mazeMap[(_currX, _currY)];
+
+        // Check if DOWNWARD movement is allowed
+        // If allowed, move down
+        if (movement[3])
+        {
+            _currY += 1;
+        }
+
+        // If not allowed, throw an error
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public string GetStatus()
