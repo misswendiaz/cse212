@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -117,7 +118,7 @@ public static class SetsAndMaps
         var firstWord = new Dictionary<char, int>();
         var secondWord = new Dictionary<char, int>();
 
-        
+
         foreach (char c in word1)
         {
             // Check if the character is a letter
@@ -137,7 +138,7 @@ public static class SetsAndMaps
                 {
                     firstWord[key1Lower] = 1;
                 }
-            }            
+            }
         }
 
         foreach (char k in word2)
@@ -232,16 +233,32 @@ public static class SetsAndMaps
     /// https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
     /// 
     /// </summary>
+
+
     public static string[] EarthquakeDailySummary()
     {
+        // USGS API URL
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+
+        // Create an HTTP client
         using var client = new HttpClient();
+
+        // Create an HTTP GET request
         using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+
+        // Send the request and get the response stream
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
+
+        // Convert the stream into readable text
         using var reader = new StreamReader(jsonStream);
+
+        // Read the entire JSON response
         var json = reader.ReadToEnd();
+
+        // Configure JSON deserialization options
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
+        // Deserialize JSON into C# objects
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
         // TODO Problem 5:
@@ -249,6 +266,32 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+
+        // Create a list
+        List<string> earthquakeData = new List<string>();
+
+        // Loop through each feature
+        foreach (Feature feature in featureCollection.features)
+        {
+            // Read place
+            string place = feature.properties.place;
+
+            // Read magnitude
+            decimal magnitude = feature.properties.mag;
+
+            // Format a string
+            string earthquakeDatum = $"{place} - Mag {magnitude}";
+
+            // Add formatted string to a list
+            earthquakeData.Add(earthquakeDatum);
+        }
+
+
+        // Return the list as an array
+        string[] earthquakeDataArray = earthquakeData.ToArray();
+
+
+        return earthquakeDataArray;
     }
 }
