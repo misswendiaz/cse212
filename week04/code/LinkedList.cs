@@ -218,6 +218,45 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+
+        // Search for the node that matches 'oldValue' by starting at the 
+        // head of the list.
+        Node? currentNode = _head;
+        while (currentNode is not null)
+        {
+            if (currentNode.Data == oldValue)
+            {
+                // If the location of 'oldValue' is at the end of the list,
+                // then we can call the RemoveTail function to remove it
+                // next we can call the InsertTail function to insert the 'newValue'
+                if (currentNode == _tail)
+                {
+                    RemoveTail();
+                    InsertTail(newValue);
+                }
+
+                // If the location of 'oldValue' is at the beginning of the list,
+                // then we can call the RemoveHead function to remove it
+                // next we can call the InsertHead function to insert the 'newValue'
+                else if (currentNode == _head)
+                {
+                    RemoveHead();
+                    InsertHead(newValue);
+                }
+
+                // For any other location of 'oldValue',
+                // we can call the InsertAfter function to insert the 'newValue'
+                // then call the Remove function to remove the 'oldValue'
+                else
+                {
+                    InsertAfter(oldValue, newValue);
+                    Remove(oldValue);
+
+                }
+            }
+
+            currentNode = currentNode.Next; // Go to the next node to search for 'value'
+        }
     }
 
     /// <summary>
