@@ -163,7 +163,53 @@ public class LinkedList : IEnumerable<int>
     {
         // TODO Problem 3
 
-        
+        // Search for the node that matches 'value' by starting at the 
+        // head of the list.
+        Node? currentNode = _head;
+        while (currentNode is not null)
+        {
+            if (currentNode.Data == value)
+            {
+                // If the location of 'value' is at the end of the list,
+                // then we can call the RemoveTail function to remove it
+                if (currentNode == _tail)
+                {
+                    RemoveTail();
+                }
+
+                // If the location of 'value' is at the beginning of the list,
+                // then we can call the RemoveHead function to remove it
+                else if (currentNode == _head)
+                {
+                    RemoveHead();
+                }
+
+                // For any other location of 'value',
+                // we need to remove the node and
+                // reconnect the links of its previous and next.
+                else
+                {
+                    Node? oldPrev = currentNode.Prev;
+                    Node? oldNext = currentNode.Next;
+
+                    // Set the oldPrev as the Prev of the oldNext
+                    if (oldNext is not null)
+                    {
+                        oldNext.Prev = oldPrev;
+                    }
+
+                    // Set the oldNext as the Next of the oldPrev
+                    if (oldPrev is not null)
+                    {
+                        oldPrev.Next = oldNext;
+                    }
+                }
+
+                return; // We can exit the function after we remove
+            }
+
+            currentNode = currentNode.Next; // Go to the next node to search for 'value'
+        }
     }
 
     /// <summary>
