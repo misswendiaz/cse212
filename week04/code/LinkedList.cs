@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Dynamic;
 
 public class LinkedList : IEnumerable<int>
 {
@@ -35,26 +36,29 @@ public class LinkedList : IEnumerable<int>
         // TODO Problem 1
 
         // Create new node
-        Node newNode = new(value);
+        Node newTail = new(value);
 
         // If the list is empty, then point both head and tail to the new node
         if (_tail is null)
         {
-            _tail = newNode;
-            _head = newNode;
+            _tail = newTail;
+            _head = newTail;
         }
 
         // If the list is not empty, then only the tail will be affected
         else
         {
-            // Connect the new node to the previouse tail
-            newNode.Prev = _tail;
+            Node oldTail = _tail;
 
-            // Connect the previous tail to the new node
-            _tail.Next = newNode;
+            // Set the prev of the new tail tot he current tail
+            newTail.Prev = oldTail;
 
-            // Update the tail to point to the new node
-            _tail = newNode;
+            // Set the next of the old tail to the new tail
+            oldTail.Next = newTail;
+
+            // Set the new tail
+            _tail = newTail;
+
         }
     }
 
@@ -88,6 +92,32 @@ public class LinkedList : IEnumerable<int>
     public void RemoveTail()
     {
         // TODO Problem 2
+
+        // If the list has only one item in it, then set head and tail 
+        // to null resulting in an empty list.  This condition will also
+        // cover an empty list.  Its okay to set to null again.
+        if (_tail == _head)
+        {
+            _tail = null;
+            _head = null;
+        }
+        // If the list has more than one item in it, then only the tail
+        // will be affected.
+        else if (_tail is not null)
+        {
+            Node oldTail = _tail;
+            Node? newTail = oldTail.Prev;
+
+            // Set the next of the new tail to null, if newTail is not null
+            if (newTail != null)
+            {
+                newTail.Next = null;
+            }
+
+            // Set the new tail
+            _tail = newTail;
+
+        }
     }
 
     /// <summary>
@@ -132,6 +162,8 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+
+        
     }
 
     /// <summary>
@@ -191,8 +223,10 @@ public class LinkedList : IEnumerable<int>
     }
 }
 
-public static class IntArrayExtensionMethods {
-    public static string AsString(this IEnumerable array) {
+public static class IntArrayExtensionMethods
+{
+    public static string AsString(this IEnumerable array)
+    {
         return "<IEnumerable>{" + string.Join(", ", array.Cast<int>()) + "}";
     }
 }
