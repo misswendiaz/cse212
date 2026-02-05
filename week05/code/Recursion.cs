@@ -1,4 +1,5 @@
 using System.Collections;
+using Microsoft.VisualBasic;
 
 public static class Recursion
 {
@@ -213,6 +214,52 @@ public static class Recursion
 
         // TODO Start Problem 5
         // ADD CODE HERE
+
+        // Add the current location in the current path
+        currPath.Add((x, y));
+
+        // Base Case
+        // If the current location is the end
+        if (maze.IsEnd(x, y) == true)
+        {
+            // Add the path to the results list
+            results.Add(currPath.AsString());
+        }
+
+        // Recursive Case
+        else
+        {
+            // Try all 4 directions
+            var moves = new (int dx, int dy)[]
+            {
+                // Up
+                (0, -1),
+
+                // Down
+                (0, 1),
+                
+                // Left
+                (-1, 0),
+
+                // Right
+                (1, 0)
+            };
+
+            foreach (var (dx, dy) in moves)
+            {
+                int newX = x + dx;
+                int newY = y + dy;
+
+                if (maze.IsValidMove(currPath, newX, newY))
+                {
+                    SolveMaze(results, maze, newX, newY, currPath);
+                }
+            }
+        }
+
+        // Backtrack
+        currPath.RemoveAt(currPath.Count - 1);
+
 
         // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
     }
