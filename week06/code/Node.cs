@@ -72,6 +72,48 @@ public class Node
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        // return 0; // Replace this line with the correct return statement(s)
+
+        int height = 1;
+
+        if (Left is null && Right is null)
+        {
+            return height;
+        }
+
+        else
+        {
+            // Get the height of the left subtree
+            int leftHeight = 1;
+            if (Left is not null)
+            {
+                leftHeight = leftHeight + Left.GetHeight();
+            }
+
+            // Get the height of the right subtree
+            int rightHeight = 1;
+            if (Right is not null)
+            {
+                rightHeight = height + Right.GetHeight();
+            }
+
+            // Compare the height of the left and the right subtrees
+            // The bigger height is the height of the tree
+            if (leftHeight > rightHeight)
+            {
+                height = leftHeight;
+                return height;
+            }
+            else if (leftHeight == rightHeight)
+            {
+                height = leftHeight;
+                return height;
+            }
+            else
+            {
+                height = rightHeight;
+                return height;
+            }
+        }
     }
 }
