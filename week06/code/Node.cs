@@ -15,6 +15,7 @@ public class Node
     {
         // TODO Start Problem 1
 
+        // If the value is less than the parent node, insert it to the left
         if (value < Data)
         {
             // Insert to the left
@@ -23,6 +24,8 @@ public class Node
             else
                 Left.Insert(value);
         }
+
+        // If the value is greater than the parent node, insert it to the right
         else if (value > Data)
         {
             // Insert to the right
@@ -31,6 +34,8 @@ public class Node
             else
                 Right.Insert(value);
         }
+
+        // If the value is equaal to the parent node, do not do anything, just go back
         else
         {
             return;
@@ -40,7 +45,28 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+
+        // If the value is equal to the data, return true (the data is found)
+        if (value == Data)
+        {
+            return true;
+        }
+
+        // If the value is not equal to the data, look somewhere else
+        else if (value < Data)
+        {
+            if (Left is null)
+                return false;
+            else
+                return Left.Contains(value);
+        }
+        else
+        {
+            if (Right is null)
+                return false;
+            else
+                return Right.Contains(value);
+        }
     }
 
     public int GetHeight()
