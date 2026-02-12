@@ -74,46 +74,18 @@ public class Node
         // TODO Start Problem 4
         // return 0; // Replace this line with the correct return statement(s)
 
-        int height = 1;
+        // Initialize heights of left and right subtrees
+        int leftHeight = 0;
+        int rightHeight = 0;
 
-        if (Left is null && Right is null)
-        {
-            return height;
-        }
+        // Get the heights of the immediate left and right subtrees
+        if (Left is not null)
+            leftHeight = Left.GetHeight();
 
-        else
-        {
-            // Get the height of the left subtree
-            int leftHeight = 1;
-            if (Left is not null)
-            {
-                leftHeight = leftHeight + Left.GetHeight();
-            }
+        if (Right is not null)
+            rightHeight = Right.GetHeight();
 
-            // Get the height of the right subtree
-            int rightHeight = 1;
-            if (Right is not null)
-            {
-                rightHeight = height + Right.GetHeight();
-            }
-
-            // Compare the height of the left and the right subtrees
-            // The bigger height is the height of the tree
-            if (leftHeight > rightHeight)
-            {
-                height = leftHeight;
-                return height;
-            }
-            else if (leftHeight == rightHeight)
-            {
-                height = leftHeight;
-                return height;
-            }
-            else
-            {
-                height = rightHeight;
-                return height;
-            }
-        }
+        // Return the bigger height plus the height of the root
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
